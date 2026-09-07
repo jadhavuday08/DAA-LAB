@@ -609,40 +609,223 @@ It can be useful for:
 * 🚀 Improving problem-solving skills
 * 🔬 Comparing algorithm performance
 
----
+# 0/1 Knapsack Problem Using Dynamic Programming
 
-# 👨‍💻 Author
+## 📌 Description
 
-**Jadhav Uday**
+This project implements the **0/1 Knapsack Problem using Dynamic Programming in Python**.
 
-🎓 B.Tech – Computer Science & Engineering (AI & ML)
-🏫 Marwadi University
+The 0/1 Knapsack problem is an optimization problem where we have a set of items, each with a specific **weight** and **value**. The goal is to select items such that the total weight does not exceed the knapsack's capacity while maximizing the total value.
 
-GitHub:
-https://github.com/jadhavuday08
+In the **0/1 Knapsack**, each item can either be:
 
----
+* ✅ Selected (1)
+* ❌ Not selected (0)
 
-# ⭐ Repository
-
-You can find the complete collection of programs here:
-
-**DAA-LAB**
-https://github.com/jadhavuday08/DAA-LAB
-
-If you find this repository useful, consider giving it a ⭐.
+An item cannot be selected more than once.
 
 ---
 
-## 📌 Note
+## 🧠 Algorithm
 
-This repository is intended for **educational and academic purposes**. The programs may be modified and improved as additional DAA practicals and algorithms are completed.
+The program uses **Dynamic Programming (DP)** to solve the problem.
+
+### Steps
+
+1. Read the number of items.
+2. Read the weight and value of each item.
+3. Read the maximum capacity of the knapsack.
+4. Create a DP table.
+5. For every item and capacity:
+
+   * If the item's weight is less than or equal to the current capacity, choose the maximum of:
+
+     * Including the item.
+     * Excluding the item.
+   * Otherwise, exclude the item.
+6. The final DP table value gives the maximum possible value.
+7. Calculate and display the program's execution time.
 
 ---
 
-## 📜 License
+## 💻 Technologies Used
 
-This project is intended primarily for educational use. You are welcome to study, modify, and use the code for learning purposes.
+* **Python 3**
+* Dynamic Programming
+* `time` module for measuring execution time
+
+---
+
+## 📂 Program Structure
+
+```text
+Knapsack/
+│
+├── knapsack.py
+└── README.md
+```
+
+---
+
+## ▶️ How to Run
+
+### 1. Install Python
+
+Make sure Python 3 is installed on your computer.
+
+Check the Python version:
+
+```bash
+python --version
+```
+
+### 2. Run the Program
+
+Open the terminal in the project directory and run:
+
+```bash
+python knapsack.py
+```
+
+---
+
+## 📝 Example Input
+
+```text
+0/1 Knapsack Problem using Dynamic Programming
+
+Enter number of items: 4
+
+Enter weight of item 1: 1
+Enter value of item 1: 15
+
+Enter weight of item 2: 3
+Enter value of item 2: 20
+
+Enter weight of item 3: 4
+Enter value of item 3: 30
+
+Enter weight of item 4: 5
+Enter value of item 4: 40
+
+Enter maximum capacity of knapsack: 7
+```
+
+## 📤 Example Output
+
+```text
+Maximum value that can be obtained: 55
+
+Time Complexity Analysis:
+Best Case    : O(n × W)
+Average Case : O(n × W)
+Worst Case   : O(n × W)
+
+Space Complexity:
+Space        : O(n × W)
+
+Execution Time:
+0.000012300 seconds
+```
+
+---
+
+## ⏱️ Complexity Analysis
+
+Let:
+
+* `n` = Number of items
+* `W` = Maximum capacity of the knapsack
+
+| Case         | Time Complexity |
+| ------------ | --------------- |
+| Best Case    | O(n × W)        |
+| Average Case | O(n × W)        |
+| Worst Case   | O(n × W)        |
+
+### Space Complexity
+
+The program uses a 2D DP table of size `(n + 1) × (W + 1)`.
+
+```text
+Space Complexity = O(n × W)
+```
+
+---
+
+## ⏱️ Execution Time
+
+The program uses Python's `time.perf_counter()` function to measure the execution time of the Knapsack algorithm.
+
+```python
+start_time = time.perf_counter()
+
+max_value = knapsack(weights, values, capacity)
+
+end_time = time.perf_counter()
+
+execution_time = end_time - start_time
+```
+
+The execution time depends on the computer, number of items, and knapsack capacity.
+
+---
+
+## 🎯 Objective
+
+The main objective of this practical is to:
+
+* Understand the **0/1 Knapsack Problem**.
+* Implement **Dynamic Programming**.
+* Understand optimization using DP.
+* Analyze **time and space complexity**.
+* Measure the actual **execution time** of the algorithm.
+
+---
+
+## 🔍 Key Concept
+
+The main recurrence relation used is:
+
+```text
+DP[i][w] = max(
+    value[i-1] + DP[i-1][w-weight[i-1]],
+    DP[i-1][w]
+)
+```
+
+If the current item's weight is greater than the available capacity:
+
+```text
+DP[i][w] = DP[i-1][w]
+```
+
+---
+
+## 📚 Learning Outcome
+
+After completing this practical, you should be able to:
+
+1. Explain the 0/1 Knapsack problem.
+2. Implement a Dynamic Programming solution in Python.
+3. Understand overlapping subproblems and optimal substructure.
+4. Analyze algorithm complexity.
+5. Measure program execution time.
+
+---
+
+## 👨‍💻 Author
+
+**Uday Jadhav**
+
+---
+
+## ⭐ Conclusion
+
+The **0/1 Knapsack Problem** can be efficiently solved using **Dynamic Programming** by breaking the problem into smaller subproblems and storing previously calculated results. This avoids repeated calculations and provides an optimal solution with a time complexity of **O(n × W)**.
+
+
+
 
 
 
