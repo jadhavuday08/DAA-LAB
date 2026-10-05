@@ -979,17 +979,384 @@ The program also demonstrates how to measure the actual execution time of algori
 * CP-Algorithms — Breadth First Search: https://cp-algorithms.com/graph/breadth-first-search.html
 * CP-Algorithms — Depth First Search: https://cp-algorithms.com/graph/depth-first-search.html
 
----
+# Prim's Algorithm in Python
+
+## 📌 Introduction
+
+This project implements **Prim's Algorithm** in Python to find the **Minimum Spanning Tree (MST)** of a connected, weighted, undirected graph.
+
+The program takes the graph as an **adjacency matrix** from the user and displays the edges selected for the Minimum Spanning Tree along with the total cost.
+
+## 🎯 Objective
+
+To implement **Prim's Algorithm** for finding the Minimum Spanning Tree of a weighted undirected graph.
+
+## 🛠️ Technologies Used
+
+* Python 3
+* Adjacency Matrix
+* Prim's Algorithm
+
+## 🔍 What is Prim's Algorithm?
+
+Prim's Algorithm is a **greedy algorithm** used to find a Minimum Spanning Tree of a weighted, connected, undirected graph.
+
+It starts from a selected vertex and repeatedly chooses the **minimum-weight edge** that connects a selected vertex to an unselected vertex.
+
+### Basic Steps
+
+1. Start with any vertex.
+2. Mark the vertex as selected.
+3. Find the minimum-weight edge connecting a selected vertex to an unselected vertex.
+4. Add that edge to the Minimum Spanning Tree.
+5. Mark the newly connected vertex as selected.
+6. Repeat until all vertices are selected.
+7. Display the selected edges and total MST cost.
+
+## 💻 Python Code
+
+```python
+def prim(graph, vertices):
+    selected = [False] * vertices
+    selected[0] = True
+
+    total_cost = 0
+
+    print("\nEdges in Minimum Spanning Tree:")
+
+    for _ in range(vertices - 1):
+        minimum = float('inf')
+        x = 0
+        y = 0
+
+        # Find the minimum weight edge
+        for i in range(vertices):
+            if selected[i]:
+                for j in range(vertices):
+                    if not selected[j] and graph[i][j] != 0:
+                        if graph[i][j] < minimum:
+                            minimum = graph[i][j]
+                            x = i
+                            y = j
+
+        selected[y] = True
+        total_cost += minimum
+
+        print(f"{x} -- {y}  Weight = {minimum}")
+
+    print("\nMinimum Spanning Tree Cost:", total_cost)
+
+
+# Main Program
+vertices = int(input("Enter number of vertices: "))
+
+graph = []
+
+print("\nEnter the adjacency matrix:")
+print("Enter 0 if there is no edge.")
+
+for i in range(vertices):
+    row = list(map(int, input(f"Row {i}: ").split()))
+    graph.append(row)
+
+prim(graph, vertices)
+```
+
+## 📥 Sample Input
+
+```text
+Enter number of vertices: 5
+
+Enter the adjacency matrix:
+Enter 0 if there is no edge.
+Row 0: 0 2 0 6 0
+Row 1: 2 0 3 8 5
+Row 2: 0 3 0 0 7
+Row 3: 6 8 0 0 9
+Row 4: 0 5 7 9 0
+```
+
+## 📤 Sample Output
+
+```text
+Edges in Minimum Spanning Tree:
+0 -- 1  Weight = 2
+1 -- 2  Weight = 3
+1 -- 4  Weight = 5
+0 -- 3  Weight = 6
+
+Minimum Spanning Tree Cost: 16
+```
+
+## 📊 Example Graph
+
+The above input represents the following weighted graph:
+
+```text
+       2
+  0 -------- 1
+  |          |\
+ 6|         3| \5
+  |          |  \
+  3          2   4
+   \          |  /
+    \         |7
+     \        |/
+       ------- 
+```
+
+## 📁 Project Structure
+
+```text
+Prim-Algorithm/
+│
+├── prim.py
+└── README.md
+```
+
+## ▶️ How to Run
+
+Make sure **Python 3** is installed on your computer.
+
+Run the program using:
+
+```bash
+python prim.py
+```
+
+Then enter the number of vertices and the adjacency matrix when prompted.
+
+## 🌟 Applications
+
+Prim's Algorithm can be used in:
+
+* Computer network design
+* Road network planning
+* Electrical grid design
+* Telecommunication networks
+* Minimum-cost connection problems
+* Network infrastructure planning
+
+## 📝 Conclusion
+
+Prim's Algorithm provides an efficient greedy approach for constructing a **Minimum Spanning Tree**. The program demonstrates how to select the minimum-weight edges while ensuring that all vertices become connected without forming cycles.
+
+## 📚 References
+
+* [CP-Algorithms — Minimum Spanning Tree (Prim's Algorithm)](https://cp-algorithms.com/graph/mst_prim.html?utm_source=chatgpt.com)
+* [Python Documentation](https://docs.python.org/3/?utm_source=chatgpt.com)
+
+
+# Kruskal's Algorithm in Python
+
+## 📌 Introduction
+
+This project implements **Kruskal's Algorithm** in Python to find the **Minimum Spanning Tree (MST)** of a connected, weighted, undirected graph.
+
+The program takes the vertices and weighted edges as input, sorts the edges by weight, and selects the minimum-weight edges while avoiding cycles.
+
+## 🎯 Objective
+
+To implement **Kruskal's Algorithm** for finding the Minimum Spanning Tree of a weighted undirected graph.
+
+## 🛠️ Technologies Used
+
+* Python 3
+* Kruskal's Algorithm
+* Union-Find / Disjoint Set data structure
+
+## 🔍 What is Kruskal's Algorithm?
+
+Kruskal's Algorithm is a **greedy algorithm** used to find the Minimum Spanning Tree of a weighted, connected, undirected graph.
+
+The algorithm selects edges in increasing order of their weights and adds an edge to the MST only if it does not create a cycle.
+
+## ⚙️ Algorithm Steps
+
+1. Start with an empty Minimum Spanning Tree.
+2. Sort all edges in increasing order of their weights.
+3. Select the edge with the smallest weight.
+4. Check whether adding the edge creates a cycle.
+5. If it does not create a cycle, add the edge to the MST.
+6. If it creates a cycle, discard the edge.
+7. Repeat until `V - 1` edges are selected.
+8. Display the selected edges and total cost.
+
+## 💻 Python Code
+
+```python
+# Kruskal's Algorithm in Python
+
+# Find the parent of a vertex
+def find(parent, vertex):
+    if parent[vertex] == vertex:
+        return vertex
+    return find(parent, parent[vertex])
+
+
+# Join two sets
+def union(parent, rank, u, v):
+    root_u = find(parent, u)
+    root_v = find(parent, v)
+
+    if root_u != root_v:
+        if rank[root_u] < rank[root_v]:
+            parent[root_u] = root_v
+        elif rank[root_u] > rank[root_v]:
+            parent[root_v] = root_u
+        else:
+            parent[root_v] = root_u
+            rank[root_u] += 1
+
+
+def kruskal(vertices, edges):
+    # Sort edges according to weight
+    edges.sort(key=lambda x: x[2])
+
+    parent = list(range(vertices))
+    rank = [0] * vertices
+
+    mst = []
+    total_cost = 0
+
+    # Select edges
+    for u, v, weight in edges:
+        root_u = find(parent, u)
+        root_v = find(parent, v)
+
+        # Add edge if it does not create a cycle
+        if root_u != root_v:
+            mst.append((u, v, weight))
+            total_cost += weight
+            union(parent, rank, u, v)
+
+            # MST contains V-1 edges
+            if len(mst) == vertices - 1:
+                break
+
+    print("\nEdges in Minimum Spanning Tree:")
+
+    for u, v, weight in mst:
+        print(f"{u} -- {v}  Weight = {weight}")
+
+    print("\nMinimum Spanning Tree Cost:", total_cost)
+
+
+# Main Program
+vertices = int(input("Enter number of vertices: "))
+edges_count = int(input("Enter number of edges: "))
+
+edges = []
+
+print("\nEnter edges (u v weight):")
+
+for i in range(edges_count):
+    u, v, weight = map(int, input().split())
+    edges.append((u, v, weight))
+
+kruskal(vertices, edges)
+```
+
+## 📥 Sample Input
+
+```text
+Enter number of vertices: 5
+Enter number of edges: 7
+
+Enter edges (u v weight):
+0 1 2
+0 3 6
+1 2 3
+1 3 8
+1 4 5
+2 4 7
+3 4 9
+```
+
+## 📤 Sample Output
+
+```text
+Edges in Minimum Spanning Tree:
+0 -- 1  Weight = 2
+1 -- 2  Weight = 3
+1 -- 4  Weight = 5
+0 -- 3  Weight = 6
+
+Minimum Spanning Tree Cost: 16
+```
+
+## 🧠 Union-Find
+
+The program uses the **Union-Find (Disjoint Set Union)** technique to determine whether adding an edge will create a cycle.
+
+### Find
+
+The `find()` function determines the representative or root of a vertex.
+
+```python
+def find(parent, vertex):
+    if parent[vertex] == vertex:
+        return vertex
+    return find(parent, parent[vertex])
+```
+
+### Union
+
+The `union()` function joins two different sets.
+
+```python
+def union(parent, rank, u, v):
+    ...
+```
+
+This allows Kruskal's Algorithm to avoid adding edges that would create cycles.
+
+## 📁 Project Structure
+
+```text
+Kruskal-Algorithm/
+│
+├── kruskal.py
+└── README.md
+```
+
+## ▶️ How to Run
+
+Make sure **Python 3** is installed.
+
+Run the program using:
+
+```bash
+python kruskal.py
+```
+
+Then enter the number of vertices, number of edges, and the weighted edges.
+
+## 🌟 Applications
+
+Kruskal's Algorithm can be used in:
+
+* Computer network design
+* Road network planning
+* Electrical grid design
+* Telecommunication networks
+* Network infrastructure planning
+* Minimum-cost connection problems
+
+## 📝 Conclusion
+
+Kruskal's Algorithm is a greedy approach for finding the **Minimum Spanning Tree** of a weighted undirected graph. By sorting the edges according to their weights and using the Union-Find technique to avoid cycles, the algorithm efficiently constructs an MST with the minimum possible total edge weight.
+
+## 📚 References
+
+* [CP-Algorithms — Kruskal's Algorithm](https://cp-algorithms.com/graph/mst_kruskal.html?utm_source=chatgpt.com)
+* [Python Documentation](https://docs.python.org/3/?utm_source=chatgpt.com)
+
 
 ## 👨‍💻 Author
 
 **Uday Jadhav**
 
----
-
-## ⭐ Conclusion
-
-The **0/1 Knapsack Problem** can be efficiently solved using **Dynamic Programming** by breaking the problem into smaller subproblems and storing previously calculated results. This avoids repeated calculations and provides an optimal solution with a time complexity of **O(n × W)**.
 
 
 
