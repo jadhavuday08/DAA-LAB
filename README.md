@@ -811,6 +811,173 @@ After completing this practical, you should be able to:
 3. Understand overlapping subproblems and optimal substructure.
 4. Analyze algorithm complexity.
 5. Measure program execution time.
+   
+
+# DFS and BFS Graph Traversal in Python
+
+This project implements **Depth First Search (DFS)** and **Breadth First Search (BFS)** for traversing an undirected graph using Python.
+
+The program also measures and displays the **execution time** of both DFS and BFS in nanoseconds.
+
+## 📌 Features
+
+* Create an undirected graph using an adjacency list.
+* Add vertices and edges using user input.
+* Perform **DFS traversal**.
+* Perform **BFS traversal**.
+* Measure DFS execution time.
+* Measure BFS execution time.
+* Display traversal results and execution times.
+
+## 🛠️ Technologies Used
+
+* **Python 3**
+* `collections.deque` for BFS queue
+* `time.perf_counter_ns()` for execution-time measurement
+
+## 📂 Algorithm
+
+### 1. Depth First Search (DFS)
+
+DFS explores a graph by going as deep as possible along each branch before backtracking.
+
+**Steps:**
+
+1. Start from the given vertex.
+2. Mark the vertex as visited.
+3. Print the vertex.
+4. Visit each unvisited adjacent vertex recursively.
+5. Continue until all reachable vertices are visited.
+
+### 2. Breadth First Search (BFS)
+
+BFS explores the graph level by level using a queue.
+
+**Steps:**
+
+1. Start from the given vertex.
+2. Mark the vertex as visited.
+3. Insert it into a queue.
+4. Remove a vertex from the queue.
+5. Visit all its unvisited adjacent vertices.
+6. Add the newly visited vertices to the queue.
+7. Continue until the queue becomes empty.
+
+## ⏱️ Time Complexity
+
+For a graph represented using an adjacency list:
+
+| Algorithm | Best Case | Average Case | Worst Case | Space Complexity |
+| --------- | --------- | ------------ | ---------- | ---------------- |
+| DFS       | O(V + E)  | O(V + E)     | O(V + E)   | O(V)             |
+| BFS       | O(V + E)  | O(V + E)     | O(V + E)   | O(V)             |
+
+Where:
+
+* **V** = Number of vertices
+* **E** = Number of edges
+
+## 💻 How to Run
+
+Make sure Python 3 is installed.
+
+Run the program using:
+
+```bash
+python dfs_bfs.py
+```
+
+## 📥 Input
+
+The program asks for:
+
+1. Number of vertices
+2. Number of edges
+3. Edges connecting the vertices
+4. Starting vertex
+
+### Example Input
+
+```text
+Enter number of vertices: 6
+Enter number of edges: 7
+Enter edges (u v):
+0 1
+0 2
+1 3
+1 4
+2 4
+3 5
+4 5
+Enter starting vertex: 0
+```
+
+## 📤 Output
+
+Example output:
+
+```text
+DFS Traversal: 0 1 3 5 4 2
+
+BFS Traversal: 0 1 2 3 4 5
+
+Execution Time:
+DFS: 8500 ns
+BFS: 6200 ns
+```
+
+> Execution time will vary depending on the computer, Python version, graph size, and system load.
+
+## 📊 DFS vs BFS
+
+| Feature          | DFS                                    | BFS                                |
+| ---------------- | -------------------------------------- | ---------------------------------- |
+| Data Structure   | Stack / Recursion                      | Queue                              |
+| Traversal        | Depth-wise                             | Level-wise                         |
+| Implementation   | Recursive in this program              | `deque`                            |
+| Time Complexity  | O(V + E)                               | O(V + E)                           |
+| Space Complexity | O(V)                                   | O(V)                               |
+| Useful For       | Path exploration, connected components | Shortest path in unweighted graphs |
+
+## 📁 Project Structure
+
+```text
+DFS-BFS/
+│
+├── dfs_bfs.py
+└── README.md
+```
+
+## 🎯 Applications
+
+### DFS Applications
+
+* Finding connected components
+* Detecting cycles
+* Maze solving
+* Topological sorting
+* Path finding
+
+### BFS Applications
+
+* Finding the shortest path in an unweighted graph
+* Level-order traversal
+* Social-network connections
+* Web crawling
+* Network broadcasting
+
+## 📝 Conclusion
+
+This project demonstrates the implementation of two fundamental graph traversal algorithms: **DFS and BFS**. Both algorithms have a time complexity of **O(V + E)** when an adjacency list is used. DFS explores vertices deeply using recursion, while BFS explores vertices level by level using a queue.
+
+The program also demonstrates how to measure the actual execution time of algorithms using Python's `time.perf_counter_ns()` function.
+
+## 📚 References
+
+* Python Documentation — `time` module: https://docs.python.org/3/library/time.html
+* Python Documentation — `collections.deque`: https://docs.python.org/3/library/collections.html#collections.deque
+* CP-Algorithms — Breadth First Search: https://cp-algorithms.com/graph/breadth-first-search.html
+* CP-Algorithms — Depth First Search: https://cp-algorithms.com/graph/depth-first-search.html
 
 ---
 
