@@ -1347,10 +1347,170 @@ Kruskal's Algorithm can be used in:
 
 Kruskal's Algorithm is a greedy approach for finding the **Minimum Spanning Tree** of a weighted undirected graph. By sorting the edges according to their weights and using the Union-Find technique to avoid cycles, the algorithm efficiently constructs an MST with the minimum possible total edge weight.
 
-## 📚 References
+# Travelling Salesman Problem (TSP)
 
-* [CP-Algorithms — Kruskal's Algorithm](https://cp-algorithms.com/graph/mst_kruskal.html?utm_source=chatgpt.com)
-* [Python Documentation](https://docs.python.org/3/?utm_source=chatgpt.com)
+## 📌 Introduction
+The Travelling Salesman Problem (TSP) is a classic optimization problem in computer science. The goal is to find the shortest possible route that visits every city exactly once and returns to the starting city.
+
+This program is implemented in Python and accepts user input for the number of cities and the distance between them.
+
+## 🎯 Objectives
+- Understand the Travelling Salesman Problem.
+- Find the minimum-cost tour between cities.
+- Accept distances from the user.
+- Calculate and display the minimum tour cost and route.
+
+## ⚙️ Algorithm
+1. Start the program.
+2. Read the number of cities from the user.
+3. Read the distance matrix.
+4. Generate possible tours starting from the first city.
+5. Calculate the total distance of each tour.
+6. Select the tour with the minimum total distance.
+7. Display the best route and its cost.
+8. Stop the program.
+
+## 💻 Requirements
+- Python 3.x
+- Basic knowledge of Python and graph algorithms
+
+## ▶️ How to Run
+1. Save the Python program as `tsp.py`.
+2. Open a terminal in the project folder.
+3. Run the following command:
+
+```bash
+python tsp.py
+```
+
+4. Enter the number of cities and the distance matrix when prompted.
+
+## 📥 Sample Input
+```text
+Enter number of cities: 4
+
+Enter the distance matrix:
+0 10 15 20
+10 0 35 25
+15 35 0 30
+20 25 30 0
+```
+
+## 📤 Sample Output
+```text
+Minimum cost: 80
+Optimal tour: 1 -> 2 -> 4 -> 3 -> 1
+```
+
+*Note: The output assumes a symmetric distance matrix and a program that searches all possible tours.*
+
+## ⏱️ Time and Space Complexity
+- **Time Complexity:** O(n!)
+- **Space Complexity:** O(n), excluding the distance matrix, for an implementation that evaluates tours without storing all permutations.
+
+## 🌍 Applications
+- Delivery route optimization
+- Logistics and transportation
+- Network design
+- Circuit board manufacturing
+- Planning travel routes
+
+## 📁 Project Structure
+```text
+Travelling-Salesman/
+├── tsp.py
+└── README.md
+```
+
+## 📝 Conclusion
+The Travelling Salesman Problem demonstrates how optimization algorithms can be used to find the shortest route among multiple cities. A brute-force solution is suitable for small inputs but becomes expensive as the number of cities increases.
+
+# Floyd–Warshall Algorithm
+
+## 📌 Introduction
+The Floyd–Warshall algorithm is a graph algorithm used to find the shortest paths between **all pairs of vertices** in a weighted graph.
+
+It uses dynamic programming to improve shortest-path solutions by considering each vertex as an intermediate point. The algorithm supports negative edge weights but does not work correctly when a negative-weight cycle exists.
+
+## 🎯 Objectives
+- Understand the all-pairs shortest-path problem.
+- Implement the Floyd–Warshall algorithm using Python.
+- Accept a weighted adjacency matrix from the user.
+- Display the shortest distances between every pair of vertices.
+
+## ⚙️ Algorithm
+1. Start the program.
+2. Read the number of vertices.
+3. Read the weighted adjacency matrix.
+4. Initialize the distance matrix using the given weights.
+5. Consider each vertex as an intermediate vertex.
+6. Update the distance between every pair of vertices using:
+
+   `dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])`
+
+7. Display the final shortest-distance matrix.
+8. Check for negative cycles if required.
+9. Stop the program.
+
+## 💻 Requirements
+- Python 3.x
+- Basic knowledge of graphs and dynamic programming
+
+## ▶️ How to Run
+1. Save the Python program as `floyd_warshall.py`.
+2. Open a terminal in the project folder.
+3. Run the following command:
+
+```bash
+python floyd_warshall.py
+```
+
+4. Enter the number of vertices and the adjacency matrix when prompted.
+
+Use `INF` to represent the absence of a direct edge, if your program supports that input format.
+
+## 📥 Sample Input
+```text
+Enter number of vertices: 4
+
+Enter the adjacency matrix:
+0 5 INF 10
+INF 0 3 INF
+INF INF 0 1
+INF INF INF 0
+```
+
+## 📤 Sample Output
+```text
+Shortest distance matrix:
+0 5 8 9
+INF 0 3 4
+INF INF 0 1
+INF INF INF 0
+```
+
+## ⏱️ Time and Space Complexity
+- **Time Complexity:** O(V³)
+- **Space Complexity:** O(V²)
+
+Here, `V` represents the number of vertices in the graph.
+
+## 🌍 Applications
+- Network routing
+- Road and transportation networks
+- Finding shortest distances between all locations
+- Graph analysis
+- Communication networks
+
+## 📁 Project Structure
+```text
+Floyd-Warshall/
+├── floyd_warshall.py
+└── README.md
+```
+
+## 📝 Conclusion
+The Floyd–Warshall algorithm efficiently calculates shortest-path distances between all pairs of vertices. It is useful for dense graphs and network problems where distances between many pairs of locations are needed.
 
 
 ## 👨‍💻 Author
